@@ -376,19 +376,26 @@ subway_project_lesson_keys = ['746169184', '3176718735']
 passing_engagement = []
 for key in engagement_by_account:    
     if key in set(submissions_by_account):
-        for submissions in submissions_by_account[str(key)]:
-            for i in range(1, len(submissions)):
-                print submissions[i]
-                
-                
-                if submission['lesson_key'] in subway_project_lesson_keys:
-                    if submission['assigned_rating'] == "PASSED":
+        for submission in submissions_by_account[str(key)]:
+            if str(submission['lesson_key']) in subway_project_lesson_keys:
+                if submission['assigned_rating'] == "PASSED":
                         passing_engagement.append(submission)
+
+passing_engagement_grouped = group_data(passing_engagement, 'account_key')
 
 non_passing_engagement = []
 for key in engagement_by_account:    
     if key in set(submissions_by_account):
         for submission in submissions_by_account[str(key)]:
             if submission['lesson_key'] in subway_project_lesson_keys:
-                if submission['assigned_rating'] != "PASSED":
+                if submission['assigned_rating'] != "INCOMPLETE":
                     non_passing_engagement.append(submission)
+                    
+non_passing_engagement_grouped = group_data(non_passing_engagement, 'account_key')
+
+
+
+
+
+for i in list(missings):
+    print i
